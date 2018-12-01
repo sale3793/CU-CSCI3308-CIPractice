@@ -91,6 +91,35 @@ START_TEST(test_2d_dist)
 }
 END_TEST
 
+START_TEST(test_triangle)
+{
+    coord_2d_t a;
+    coord_2d_t b;
+    coord_2d_t c;
+
+    a.x = 0;
+    a.y = 0;
+    b.x = 10;
+    b.y = -5;
+    c.x = 26;
+    c.y = 0;
+    ck_assert(coord_2d_area_triangle(&a, &b ,&c) == 65);
+
+    a.x = -10;
+    a.y = 15;
+    b.x = -5;
+    b.y = 25;
+    c.x = 4;
+    c.y = 21;
+
+    // printf("Test %f\n", coord_2d_area_triangle(&a, &b , &c));
+    ck_assert(coord_2d_area_triangle(&a, &b , &c) == 55);
+
+    
+
+}
+END_TEST
+
 /* coord_2d_midpoint Test */
 START_TEST(test_2d_midpoint)
 {
@@ -145,6 +174,62 @@ START_TEST(test_2d_midpoint)
 }
 END_TEST
 
+
+/* coord_2d_midpoint Test */
+// START_TEST(test_2d_zero)
+// {
+//     coord_2d_t a;
+//     coord_2d_t b;
+//     coord_2d_t mid;
+//     coord_2d_t exp;
+
+//     a.x = b.x = 0;
+//     a.y = b.y = 0;
+//     coord_2d_zero(&mid, &a, &b);
+//     exp.x = 0;
+//     exp.y = 0;
+//     ck_assert(coord_2d_zero(&mid, &exp));
+
+//     a.x = 0;
+//     a.y = 0;
+//     b.x = 0;
+//     b.y = 0;
+//     coord_2d_zero(&mid, &a, &b);
+//     exp.x = 0;
+//     exp.y = 0;
+//     ck_assert(coord_2d_zero(&mid, &exp));
+
+//     a.x = 0;
+//     a.y = 0;
+//     b.x = 0;
+//     b.y = 0;
+//     coord_2d_zero(&mid, &a, &b);
+//     exp.x = 0;
+//     exp.y = 0;
+//     ck_assert(coord_2d_zero(&mid, &exp));
+
+//     a.x = 0;
+//     a.y = 0;
+//     b.x = 0;
+//     b.y = 0;
+//     coord_2d_zero(&mid, &a, &b);
+//     exp.x = 0;
+//     exp.y = 0;
+//     ck_assert(coord_2d_zero(&mid, &exp));
+
+//     a.x = 0;
+//     a.y = 0;
+//     b.x = 0;
+//     b.y = 0;
+//     coord_2d_zero(&mid, &a, &b);
+//     exp.x = 0;
+//     exp.y = 0;
+//     ck_assert(coord_zero(&mid, &exp));
+
+// }
+// END_TEST
+
+
 /* coord_2d Test Suite */
 Suite* coord_2d_suite(void)
 {
@@ -162,10 +247,24 @@ Suite* coord_2d_suite(void)
     TCase* tc_2d_midpoint = tcase_create("coord_2d_midpoint");
     tcase_add_test(tc_2d_midpoint, test_2d_midpoint);
 
+    /*ADDED TEST CASES HERE*/
+    // TCase* tc_2d_zero = tcase_create("coord_2d_zero");
+    // tcase_add_test(tc_2d_midpoint, test_2d_zero);
+
+    // TCase* tc_2d_negatives = tcase_create("coord_2d_negatives");
+    // tcase_add_test(tc_2d_negatives, test_2d_negatives);
+
+    TCase* tc_2d_triangle = tcase_create("coord_2d_negatives");
+    tcase_add_test(tc_2d_triangle, test_triangle);
     /* Add Cases to Suite */
     suite_add_tcase(s, tc_2d_eq);
     suite_add_tcase(s, tc_2d_dist);
     suite_add_tcase(s, tc_2d_midpoint);
+    suite_add_tcase(s, tc_2d_triangle);
+
+    /*ADDED TEST CASES HERE*/
+    // suite_add_tcase(s, tc_2d_zero);
+    // suite_add_tcase(s, tc_2d_negatives);
 
     /* Return Suite */
     return s;
