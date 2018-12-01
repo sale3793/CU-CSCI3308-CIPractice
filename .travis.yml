@@ -1,5 +1,3 @@
-language: c
-install: make dep
 script: make test
-sudo: enabled
-compiler: -gcc
+install: sudo apt-get install check 
+language: c
